@@ -52,13 +52,18 @@ public class ArrayListTest {
         assertEquals("D", arrayWithThreeElements.get(1));
         assertEquals("E", arrayWithThreeElements.get(2));
         assertEquals("B", arrayWithThreeElements.get(3));
-        arrayWithThreeElements.add("X",0);
+       //arrayWithThreeElements.add("A",9);
+        arrayWithThreeElements.add("A",8);
+
         assertEquals(9, arrayWithThreeElements.size());
-        assertEquals("X", arrayWithThreeElements.get(0));
-        assertEquals("A", arrayWithThreeElements.get(1));
-         arrayWithThreeElements.add("A",9);
-        assertEquals(10, arrayWithThreeElements.size());
-        assertEquals("A", arrayWithThreeElements.get(9));
-        assertEquals("A", arrayWithThreeElements.get(10));
+        assertEquals("F", arrayWithThreeElements.get(7));
+        assertEquals("A", arrayWithThreeElements.get(8));
+    }
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void testAddIndexOutOfBOund() {
+
+        arrayWithThreeElements.add("D",-1);
+       arrayWithThreeElements.add("D",8);
+
     }
 }

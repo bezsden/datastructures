@@ -25,7 +25,7 @@ public class ArrayList implements List {
 
     @Override
     public void add(Object value, int index) {
-        if (index < 0 && index > size ) {
+        if (index < 0 || index > size) {
             throw
                     new IndexOutOfBoundsException();
         }
@@ -33,13 +33,9 @@ public class ArrayList implements List {
         //          A B C
         // 0 - size 0 1 2 , size 3
         // 1 add D
-
-
-
-        System.arraycopy(array, index, array, index + 1, array.length-index-1);
+        System.arraycopy(array, index, array, index + 1, array.length - index - 1);
         array[index] = value;
         size++;
-
     }
 
     @Override
