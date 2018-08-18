@@ -1,5 +1,7 @@
 package com.bezsden.datastrucktures.list;
 
+import java.util.Arrays;
+
 public class ArrayList implements List {
     private int size; // 0
     private Object[] array = new Object[5];
@@ -77,6 +79,7 @@ public class ArrayList implements List {
     @Override
     public void clear() {
         array=new Object[5];
+        size=0;
 
     }
 
@@ -109,11 +112,36 @@ public class ArrayList implements List {
 
     @Override
     public int indexOf(Object value) {
-        return 0;
+        for (int i = 0; i < size-1; i++) {
+            if (array[i].equals(value)) {
+                return i;
+            }
+
+        }
+        return -1;
+
     }
 
     @Override
     public int lastIndexOf(Object value) {
-        return 0;
+        for (int i = size-1; i >=0; i--) {
+            if (array[i].equals(value)) {
+                return i;
+            }
+
+        }
+        return -1;
+     }
+
+    @Override
+    public String toString() {
+        String arrayString=""+array[0];
+        for (int i = 1; i < size; i++) {
+             arrayString = arrayString + ", " + array[i];
+
+        }
+        arrayString="["+arrayString+"]";
+        return arrayString ;
+
     }
 }

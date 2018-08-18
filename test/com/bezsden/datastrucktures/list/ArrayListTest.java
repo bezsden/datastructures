@@ -3,6 +3,8 @@ package com.bezsden.datastrucktures.list;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 
@@ -77,6 +79,85 @@ public class ArrayListTest {
 
         arrayWithThreeElements.remove(-1);
         arrayWithThreeElements.remove(10);
+
+    }
+
+
+
+    @Test
+    public void set() {
+        arrayWithThreeElements.set("z",1);
+        assertEquals("z",arrayWithThreeElements.get(1));
+        assertEquals("A",arrayWithThreeElements.get(0));
+        assertEquals("C",arrayWithThreeElements.get(2));
+     }
+
+    @Test //(expected =AssertionError.class )
+    public void clear() {
+        arrayWithThreeElements.clear();
+        //arrayWithThreeElements.get(0);
+        //assertEquals("A",0);
+        arrayWithThreeElements.add("Z");
+        arrayWithThreeElements.get(0);
+        assertEquals("Z",arrayWithThreeElements.get(0));
+
+    }
+
+    @Test
+    public void sizeIncrease() {
+        arrayWithThreeElements.add("F");
+        arrayWithThreeElements.add("F");
+        arrayWithThreeElements.add("F");
+        arrayWithThreeElements.add("F");
+        arrayWithThreeElements.add("F");
+    }
+
+    @Test
+    public void isEmpty() {
+        arrayWithThreeElements.clear();
+        arrayWithThreeElements.isEmpty();
+        assertEquals(true,arrayWithThreeElements.isEmpty());
+    }
+    @Test
+    public void isEmptyFalse() {
+                arrayWithThreeElements.isEmpty();
+        assertEquals(false,arrayWithThreeElements.isEmpty());
+    }
+
+    @Test
+    public void contains() {
+        assertEquals(true,arrayWithThreeElements.contains("A"));
+    }
+    @Test
+    public void notContains() {
+        assertEquals(false,arrayWithThreeElements.contains("Z"));
+    }
+
+    @Test
+    public void indexOf() {
+     assertEquals(0,arrayWithThreeElements.indexOf("A"));
+    }
+    @Test (expected = AssertionError.class)
+    public void noIndexOf() {
+        assertEquals(0,arrayWithThreeElements.indexOf("Z"));
+
+
+    }
+
+    @Test
+    public void lastIndexOf() {
+        arrayWithThreeElements.add("A");
+        assertEquals(6,arrayWithThreeElements.lastIndexOf("A"));
+    }
+
+    @Test
+    public void testToString() {
+        arrayWithThreeElements.add("G");
+        arrayWithThreeElements.add("H");
+        arrayWithThreeElements.add("I");
+       // arrayWithThreeElements.toString();
+        //System.out.println( arrayWithThreeElements.toString());
+        assertEquals("[A, B, C, D, E, F, G, H, I]",  arrayWithThreeElements.toString());
 
     }
 }
