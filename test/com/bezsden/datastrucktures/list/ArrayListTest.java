@@ -72,4 +72,11 @@ public class ArrayListTest {
         arrayWithThreeElements.remove(1);
         assertEquals("C", arrayWithThreeElements.get(1));
     }
+    @Test (expected = IndexOutOfBoundsException.class)
+    public void testRemoveIndexOutOfBOund() {
+
+        arrayWithThreeElements.remove(-1);
+        arrayWithThreeElements.remove(10);
+
+    }
 }

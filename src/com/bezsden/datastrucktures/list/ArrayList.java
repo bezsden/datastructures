@@ -13,7 +13,12 @@ public class ArrayList implements List {
             this.array = newArray;
         }
     }
-
+    private void bounds (int index){
+        if (index < 0 || index > size-1) {
+            throw
+                    new IndexOutOfBoundsException();
+        }
+    }
     @Override
     public void add(Object value) {
         increaseArray(array);
@@ -25,6 +30,7 @@ public class ArrayList implements List {
 
     @Override
     public void add(Object value, int index) {
+        // everywhere size-1, here size
         if (index < 0 || index > size) {
             throw
                     new IndexOutOfBoundsException();
@@ -42,14 +48,11 @@ public class ArrayList implements List {
 
     @Override
     public Object remove(int index) {
-        if (index < 0 || index > size-1) {
-            throw
-                    new IndexOutOfBoundsException();
-        }
-        array[index] = null;
-        System.arraycopy(array, index+1, array, index , array.length-index-1);
+        bounds(index);
+        //array[index] = null;
+        System.arraycopy(array, index + 1, array, index, array.length - index - 1);
         size--;
-        System.out.println(array[array.length-1]+" "+array.length+" "+size);
+        System.out.println(array[array.length - 1] + " " + array.length + " " + size);
         return array;
     }
     // A B C D E F 6
@@ -58,20 +61,22 @@ public class ArrayList implements List {
     // alternative is to copy cdef to 1, without nullification, what is with index 5 value?
 
 
-
-
     @Override
     public Object get(int index) {
+
+        bounds(index);
         return array[index];
     }
 
     @Override
     public Object set(Object value, int index) {
-        return null;
+        bounds(index);
+        return array[index]=value;
     }
 
     @Override
     public void clear() {
+        array=new Object[5];
 
     }
 
