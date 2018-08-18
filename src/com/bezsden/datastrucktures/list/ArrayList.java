@@ -87,11 +87,23 @@ public class ArrayList implements List {
 
     @Override
     public boolean isEmpty() {
-        return false;
+        for (int i = 0; i < size-1; i++) {
+            if (array[i]!=null) {
+                return false;
+            }
+
+        }
+        return true;
     }
 
     @Override
     public boolean contains(Object value) {
+        for (int i = 0; i < size-1; i++) {
+            if (array[i].equals(value)) {
+                return true;
+            }
+
+        }
         return false;
     }
 
