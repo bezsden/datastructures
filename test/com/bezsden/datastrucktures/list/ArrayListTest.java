@@ -66,4 +66,10 @@ public class ArrayListTest {
        arrayWithThreeElements.add("D",8);
 
     }
+
+    @Test
+    public void testRemove() {
+        arrayWithThreeElements.remove(1);
+        assertEquals("C", arrayWithThreeElements.get(1));
+    }
 }
