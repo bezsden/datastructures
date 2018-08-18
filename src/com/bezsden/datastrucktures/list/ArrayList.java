@@ -1,18 +1,41 @@
 package com.bezsden.datastrucktures.list;
 
 public class ArrayList implements List {
+    private int size; // 0
     private Object[] array = new Object[5];
-    private int size;
+
+
+    private void increaseArray(Object[] array) {
+        if (size == array.length) {
+            int newSize = array.length * 3 / 2;
+            Object[] newArray = new Object[newSize];
+            System.arraycopy(array, 0, newArray, 0, array.length);
+            this.array = newArray;
+        }
+    }
 
     @Override
     public void add(Object value) {
+        increaseArray(array);
         array[size] = value;
         size++;
+
+
     }
 
     @Override
     public void add(Object value, int index) {
-
+        if (index < 0 || index > size) {
+            throw
+                    new IndexOutOfBoundsException();
+        }
+        increaseArray(array);
+        //          A B C
+        // 0 - size 0 1 2 , size 3
+        // 1 add D
+        System.arraycopy(array, index, array, index + 1, array.length - index - 1);
+        array[index] = value;
+        size++;
     }
 
     @Override
