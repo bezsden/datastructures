@@ -112,7 +112,7 @@ public class ArrayList implements List {
 
     @Override
     public int indexOf(Object value) {
-        for (int i = 0; i < size-1; i++) {
+        for (int i = 0; i < size; i++) {
             if (array[i].equals(value)) {
                 return i;
             }
