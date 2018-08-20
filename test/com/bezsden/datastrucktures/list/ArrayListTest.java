@@ -15,11 +15,11 @@ import static org.junit.Assert.*;
 
 
 public class ArrayListTest {
-    List list;
+    List<String> list;
 
     @Before
     public void before() {
-        list = new ArrayList();
+        list = new ArrayList< >();
         list.add("str1");
         list.add("str2");
         list.add("str3");
@@ -214,6 +214,16 @@ public class ArrayListTest {
         assertEquals(list.get(0), "str1");
         assertEquals(list.get(1), "str2");
         assertEquals(list.size(), 3);
+    }
+
+    @Test
+    public void testGeneric() {
+      //  list.add(1);
+        for (Object e:list){
+            System.out.println(e);
+
+        }
+
     }
 }
 

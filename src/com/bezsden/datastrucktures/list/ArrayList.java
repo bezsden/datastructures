@@ -1,8 +1,12 @@
 package com.bezsden.datastrucktures.list;
 
-import java.util.Arrays;
+import jdk.nashorn.internal.runtime.arrays.ArrayLikeIterator;
 
-public class ArrayList implements List {
+import java.util.Arrays;
+import java.util.Iterator;
+
+public class ArrayList<E>  implements List<E>,Iterable<E>
+{
     private int size; // 0
     private Object[] array = new Object[5];
 
@@ -21,8 +25,14 @@ public class ArrayList implements List {
                     new IndexOutOfBoundsException();
         }
     }
+
+
     @Override
-    public void add(Object value) {
+    public Iterator<E> iterator() {
+        return new ArrayListIterator<E>();
+    }
+
+    public void add(E value) {
         increaseArray(array);
         array[size] = value;
         size++; // has size then increases it, ++size  - increases first then shows increased.
@@ -31,7 +41,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public void add(Object value, int index) {
+    public void add(E value, int index) {
         // everywhere size-1, here size
         if (index < 0 || index > size) {
             throw
@@ -49,13 +59,13 @@ public class ArrayList implements List {
     }
 
     @Override
-    public Object remove(int index) {
+    public E remove(int index) {
         bounds(index);
         //array[index] = null;
         System.arraycopy(array, index + 1, array, index, array.length - index - 1);
         size--;
         //System.out.println(array[array.length - 1] + " " + array.length + " " + size);
-        return array;
+        return (E) array;
     }
     // A B C D E F 6
     // 0 1 2 3 4 5
@@ -64,16 +74,16 @@ public class ArrayList implements List {
 
 
     @Override
-    public Object get(int index) {
+    public E get(int index) {
 
         bounds(index);
-        return array[index];
+        return (E) array[index];
     }
 
     @Override
-    public Object set(Object value, int index) {
+    public E set(E value, int index) {
         bounds(index);
-        return array[index]=value;
+        return (E) (array[index]=value);
     }
 
     @Override
@@ -100,7 +110,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public boolean contains(Object value) {
+    public boolean contains(E value) {
         for (int i = 0; i < size-1; i++) {
             if (array[i].equals(value)) {
                 return true;
@@ -111,7 +121,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public int indexOf(Object value) {
+    public int indexOf(E value) {
         for (int i = 0; i < size; i++) {
             if (array[i].equals(value)) {
                 return i;
@@ -123,7 +133,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public int lastIndexOf(Object value) {
+    public int lastIndexOf(E value) {
         for (int i = size-1; i >=0; i--) {
             if (array[i].equals(value)) {
                 return i;
@@ -144,4 +154,21 @@ public class ArrayList implements List {
         return arrayString ;
 
     }
+
+
+    public class ArrayListIterator<E> implements Iterator<E> {
+          int index;
+
+         public boolean hasNext() {
+            return index < size;
+        }
+
+         public E next() {
+            E result = (E) array[index];
+            index++;
+            return result;
+        }
+    }
+
+
 }
