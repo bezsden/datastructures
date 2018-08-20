@@ -7,7 +7,7 @@ public class ArrayList implements List {
 
     private void increaseArray(Object[] array) {
         if (size == array.length) {
-            int newSize = array.length * 3 / 2;
+            int newSize = array.length * 3 / 2+1; // +1 for object init 0-1 size
             Object[] newArray = new Object[newSize];
             System.arraycopy(array, 0, newArray, 0, array.length);
             this.array = newArray;
