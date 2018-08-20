@@ -54,7 +54,7 @@ public class ArrayList implements List {
         //array[index] = null;
         System.arraycopy(array, index + 1, array, index, array.length - index - 1);
         size--;
-        System.out.println(array[array.length - 1] + " " + array.length + " " + size);
+        //System.out.println(array[array.length - 1] + " " + array.length + " " + size);
         return array;
     }
     // A B C D E F 6

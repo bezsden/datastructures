@@ -43,7 +43,7 @@ public class ArrayListTest {
         assertEquals(list.get(1), "str2");
         assertEquals(list.get(2), "str3");
         assertEquals(list.get(3), "str4");
-        assertEquals(list.size(), 4);
+        assertEquals(list.size(), 5);
     }
 
     @org.junit.Test
@@ -51,8 +51,8 @@ public class ArrayListTest {
         list.add("str4");
         list.add("str5");
         list.add("str6");
-        assertEquals(list.get(5), "str6");
-        assertEquals(list.size(), 6);
+        assertEquals(list.get(5), "str5");
+        assertEquals(list.size(), 7);
     }
 
     @org.junit.Test
@@ -71,7 +71,7 @@ public class ArrayListTest {
         assertEquals(list.get(1), "str1");
         assertEquals(list.get(2), "str2");
         assertEquals(list.get(3), "str3");
-        assertEquals(list.size(), 4);
+        assertEquals(5, list.size());
     }
 
     @org.junit.Test
@@ -81,7 +81,8 @@ public class ArrayListTest {
         assertEquals(list.get(1), "center");
         assertEquals(list.get(2), "str2");
         assertEquals(list.get(3), "str3");
-        assertEquals(list.size(), 4);
+        assertEquals(list.get(4), "str4");
+        assertEquals(list.size(), 5);
     }
 
     @org.junit.Test
@@ -91,7 +92,7 @@ public class ArrayListTest {
         assertEquals(list.get(1), "str2");
         assertEquals(list.get(2), "str3");
         assertEquals(list.get(3), "end");
-        assertEquals(list.size(), 4);
+        assertEquals(list.size(), 5);
     }
 
     @org.junit.Test
@@ -145,7 +146,8 @@ public class ArrayListTest {
         assertEquals(list.get(0), "setValue");
         assertEquals(list.get(1), "str2");
         assertEquals(list.get(2), "str3");
-        assertEquals(list.size(), 3);
+        assertEquals(list.get(3), "str4");
+        assertEquals(list.size(), 4);
     }
 
     @org.junit.Test
@@ -154,7 +156,7 @@ public class ArrayListTest {
         assertEquals(list.get(0), "str1");
         assertEquals(list.get(1), "setValue");
         assertEquals(list.get(2), "str3");
-        assertEquals(list.size(), 3);
+        assertEquals(list.size(), 4);
     }
 
     @org.junit.Test
@@ -163,7 +165,7 @@ public class ArrayListTest {
         assertEquals(list.get(0), "str1");
         assertEquals(list.get(1), "str2");
         assertEquals(list.get(2), "setValue");
-        assertEquals(list.size(), 3);
+        assertEquals(list.size(), 4);
     }
 
     @org.junit.Test
@@ -186,8 +188,8 @@ public class ArrayListTest {
 
     @org.junit.Test
     public void testGetEnd() {
-        Object actual = list.get(2);
-        assertEquals(actual, "str3");
+        Object actual = list.get(3);
+        assertEquals(actual, "str4");
     }
 
     @org.junit.Test
@@ -195,7 +197,7 @@ public class ArrayListTest {
         list.remove(0);
         assertEquals(list.get(0), "str2");
         assertEquals(list.get(1), "str3");
-        assertEquals(list.size(), 2);
+        assertEquals(list.size(), 3);
     }
 
     @org.junit.Test
@@ -203,7 +205,7 @@ public class ArrayListTest {
         list.remove(1);
         assertEquals(list.get(0), "str1");
         assertEquals(list.get(1), "str3");
-        assertEquals(list.size(), 2);
+        assertEquals(list.size(), 3);
     }
 
     @org.junit.Test
@@ -211,7 +213,7 @@ public class ArrayListTest {
         list.remove(2);
         assertEquals(list.get(0), "str1");
         assertEquals(list.get(1), "str2");
-        assertEquals(list.size(), 2);
+        assertEquals(list.size(), 3);
     }
 }
 
