@@ -8,156 +8,211 @@ import java.util.Arrays;
 import static org.junit.Assert.*;
 
 
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+
 public class ArrayListTest {
-    private ArrayList arrayWithThreeElements = new ArrayList();
+    List list;
 
     @Before
     public void before() {
-        arrayWithThreeElements.add("A");
-        arrayWithThreeElements.add("B");
-        arrayWithThreeElements.add("C");
-        arrayWithThreeElements.add("D");
-        arrayWithThreeElements.add("E");
-        arrayWithThreeElements.add("F");
+        list = new ArrayList();
+        list.add("str1");
+        list.add("str2");
+        list.add("str3");
+        list.add("str4");
     }
 
-    @Test
-    public void testGetByIndex() {
-        assertEquals(6, arrayWithThreeElements.size());
+    @org.junit.Test
+    public void testAddIntoEmptyList() {
+        list.clear();
+        assertEquals(list.size(), 0);
 
-        assertEquals("A", arrayWithThreeElements.get(0));
-        assertEquals("B", arrayWithThreeElements.get(1));
-        assertEquals("C", arrayWithThreeElements.get(2));
+        list.add("one");
+        assertEquals(list.get(0), "one");
+        assertEquals(list.size(), 1);
     }
 
-    @Test
-    public void testSize() {
-        assertEquals(3, arrayWithThreeElements.size());
+    @org.junit.Test
+    public void testAddIntoNotEmptyList() {
+        list.add("str4");
+        assertEquals(list.get(0), "str1");
+        assertEquals(list.get(1), "str2");
+        assertEquals(list.get(2), "str3");
+        assertEquals(list.get(3), "str4");
+        assertEquals(list.size(), 4);
+    }
+
+    @org.junit.Test
+    public void testAddEnsureCapacity() {
+        list.add("str4");
+        list.add("str5");
+        list.add("str6");
+        assertEquals(list.get(5), "str6");
+        assertEquals(list.size(), 6);
+    }
+
+    @org.junit.Test
+    public void testAddIndexEmptyList() {
+        list.clear();
+        assertEquals(list.size(), 0);
+        list.add("begin", 0);
+        assertEquals(list.get(0), "begin");
+        assertEquals(list.size(), 1);
+    }
+
+    @org.junit.Test
+    public void testAddIndexBegin() {
+        list.add("begin", 0);
+        assertEquals(list.get(0), "begin");
+        assertEquals(list.get(1), "str1");
+        assertEquals(list.get(2), "str2");
+        assertEquals(list.get(3), "str3");
+        assertEquals(list.size(), 4);
+    }
+
+    @org.junit.Test
+    public void testAddIndexCenter() {
+        list.add("center", 1);
+        assertEquals(list.get(0), "str1");
+        assertEquals(list.get(1), "center");
+        assertEquals(list.get(2), "str2");
+        assertEquals(list.get(3), "str3");
+        assertEquals(list.size(), 4);
+    }
+
+    @org.junit.Test
+    public void testAddIndexEnd() {
+        list.add("end", 3);
+        assertEquals(list.get(0), "str1");
+        assertEquals(list.get(1), "str2");
+        assertEquals(list.get(2), "str3");
+        assertEquals(list.get(3), "end");
+        assertEquals(list.size(), 4);
+    }
+
+    @org.junit.Test
+    public void testIndexOf() {
+        int actual = list.indexOf("str2");
+        assertEquals(actual, 1);
+    }
+
+    @org.junit.Test
+    public void testIndexOfDoesNotExist() {
+        int actual = list.indexOf("str50");
+        assertEquals(actual, -1);
+    }
+
+    @org.junit.Test
+    public void testLastIndexOf() {
+        list.add("str2", 2);
+        int actual = list.lastIndexOf("str2");
+        assertEquals(actual, 2);
+    }
+
+    @org.junit.Test
+    public void testLastIndexOfDoesNotExist() {
+        int actual = list.lastIndexOf("str50");
+        assertEquals(actual, -1);
+    }
+
+    @org.junit.Test
+    public void testContainsTrue() {
+        assertTrue(list.contains("str3"));
     }
 
 
-    @Test
-    public void testAddIndex() {
-        // A B C D E F
-        // 0 1 2 3 4 5 6 7 8
-        // A D B C D E F      D1
-        // A D E B C D E F    E2
-        // A D E B C D E F A  A8
-        assertEquals(6, arrayWithThreeElements.size());
-       arrayWithThreeElements.add("D",1);
-        assertEquals(7, arrayWithThreeElements.size());
-        assertEquals("A", arrayWithThreeElements.get(0));
-        assertEquals("D", arrayWithThreeElements.get(1));
-        assertEquals("B", arrayWithThreeElements.get(2));
-        arrayWithThreeElements.add("E",2);
-        assertEquals(8, arrayWithThreeElements.size());
-        assertEquals("D", arrayWithThreeElements.get(1));
-        assertEquals("E", arrayWithThreeElements.get(2));
-        assertEquals("B", arrayWithThreeElements.get(3));
-       //arrayWithThreeElements.add("A",9);
-        arrayWithThreeElements.add("A",8);
-
-        assertEquals(9, arrayWithThreeElements.size());
-        assertEquals("F", arrayWithThreeElements.get(7));
-        assertEquals("A", arrayWithThreeElements.get(8));
-    }
-    @Test (expected = IndexOutOfBoundsException.class)
-    public void testAddIndexOutOfBOund() {
-
-        arrayWithThreeElements.add("D",-1);
-       arrayWithThreeElements.add("D",8);
-
+    @org.junit.Test
+    public void testContainsFalse() {
+        assertFalse(list.contains("str50"));
     }
 
-    @Test
-    public void testRemove() {
-        arrayWithThreeElements.remove(1);
-        assertEquals("C", arrayWithThreeElements.get(1));
-    }
-    @Test (expected = IndexOutOfBoundsException.class)
-    public void testRemoveIndexOutOfBOund() {
-
-        arrayWithThreeElements.remove(-1);
-        arrayWithThreeElements.remove(10);
-
+    @org.junit.Test(expected = IndexOutOfBoundsException.class)
+    public void testSetEmptyList() {
+        list.clear();
+        assertEquals(list.size(), 0);
+        list.set("setValue", 0);
+        assertEquals(list.get(0), "setValue");
+        assertEquals(list.size(), 1);
     }
 
-
-
-    @Test
-    public void set() {
-        arrayWithThreeElements.set("z",1);
-        assertEquals("z",arrayWithThreeElements.get(1));
-        assertEquals("A",arrayWithThreeElements.get(0));
-        assertEquals("C",arrayWithThreeElements.get(2));
-     }
-
-    @Test //(expected =AssertionError.class )
-    public void clear() {
-        arrayWithThreeElements.clear();
-        //arrayWithThreeElements.get(0);
-        //assertEquals("A",0);
-        arrayWithThreeElements.add("Z");
-        arrayWithThreeElements.get(0);
-        assertEquals("Z",arrayWithThreeElements.get(0));
-
+    @org.junit.Test
+    public void testSetBegin() {
+        list.set("setValue", 0);
+        assertEquals(list.get(0), "setValue");
+        assertEquals(list.get(1), "str2");
+        assertEquals(list.get(2), "str3");
+        assertEquals(list.size(), 3);
     }
 
-    @Test
-    public void sizeIncrease() {
-        arrayWithThreeElements.add("F");
-        arrayWithThreeElements.add("F");
-        arrayWithThreeElements.add("F");
-        arrayWithThreeElements.add("F");
-        arrayWithThreeElements.add("F");
+    @org.junit.Test
+    public void testSetCenter() {
+        list.set("setValue", 1);
+        assertEquals(list.get(0), "str1");
+        assertEquals(list.get(1), "setValue");
+        assertEquals(list.get(2), "str3");
+        assertEquals(list.size(), 3);
     }
 
-    @Test
-    public void isEmpty() {
-        arrayWithThreeElements.clear();
-        arrayWithThreeElements.isEmpty();
-        assertEquals(true,arrayWithThreeElements.isEmpty());
-    }
-    @Test
-    public void isEmptyFalse() {
-                arrayWithThreeElements.isEmpty();
-        assertEquals(false,arrayWithThreeElements.isEmpty());
+    @org.junit.Test
+    public void testSetEnd() {
+        list.set("setValue", 2);
+        assertEquals(list.get(0), "str1");
+        assertEquals(list.get(1), "str2");
+        assertEquals(list.get(2), "setValue");
+        assertEquals(list.size(), 3);
     }
 
-    @Test
-    public void contains() {
-        assertEquals(true,arrayWithThreeElements.contains("A"));
-    }
-    @Test
-    public void notContains() {
-        assertEquals(false,arrayWithThreeElements.contains("Z"));
+    @org.junit.Test
+    public void testClear() {
+        list.clear();
+        assertEquals(list.size(), 0);
     }
 
-    @Test
-    public void indexOf() {
-     assertEquals(0,arrayWithThreeElements.indexOf("A"));
-    }
-    @Test (expected = AssertionError.class)
-    public void noIndexOf() {
-        assertEquals(0,arrayWithThreeElements.indexOf("Z"));
-
-
+    @org.junit.Test
+    public void testGetBegin() {
+        Object actual = list.get(0);
+        assertEquals(actual, "str1");
     }
 
-    @Test
-    public void lastIndexOf() {
-        arrayWithThreeElements.add("A");
-        assertEquals(6,arrayWithThreeElements.lastIndexOf("A"));
+    @org.junit.Test
+    public void testGetCenter() {
+        Object actual = list.get(1);
+        assertEquals(actual, "str2");
     }
 
-    @Test
-    public void testToString() {
-        arrayWithThreeElements.add("G");
-        arrayWithThreeElements.add("H");
-        arrayWithThreeElements.add("I");
-       // arrayWithThreeElements.toString();
-        //System.out.println( arrayWithThreeElements.toString());
-        assertEquals("[A, B, C, D, E, F, G, H, I]",  arrayWithThreeElements.toString());
+    @org.junit.Test
+    public void testGetEnd() {
+        Object actual = list.get(2);
+        assertEquals(actual, "str3");
+    }
 
+    @org.junit.Test
+    public void testRemoveBegin() {
+        list.remove(0);
+        assertEquals(list.get(0), "str2");
+        assertEquals(list.get(1), "str3");
+        assertEquals(list.size(), 2);
+    }
+
+    @org.junit.Test
+    public void testRemoveCenter() {
+        list.remove(1);
+        assertEquals(list.get(0), "str1");
+        assertEquals(list.get(1), "str3");
+        assertEquals(list.size(), 2);
+    }
+
+    @org.junit.Test
+    public void testRemoveEnd() {
+        list.remove(2);
+        assertEquals(list.get(0), "str1");
+        assertEquals(list.get(1), "str2");
+        assertEquals(list.size(), 2);
     }
 }
+
+
