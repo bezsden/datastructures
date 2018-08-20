@@ -9,7 +9,7 @@ public class ArrayList implements List {
 
     private void increaseArray(Object[] array) {
         if (size == array.length) {
-            int newSize = array.length * 3 / 2+1; // +1 for object init 0-1 size
+            int newSize = array.length * 3 / 2+2; // +1 for object init 0-1 size
             Object[] newArray = new Object[newSize];
             System.arraycopy(array, 0, newArray, 0, array.length);
             this.array = newArray;
@@ -43,7 +43,7 @@ public class ArrayList implements List {
         // A in 0 -> leave; B,C -> 2,3; D add to 1;
         // B,C  insert into 2, length 2, (size - index) or (array.length-index)
         // A B C D E, 5 -> insert E 2 -> A B, + C D E - > 2+1, 5-2 (size-index) ;
-        System.arraycopy(array, index, array, index + 1, array.length - index);
+        System.arraycopy(array, index, array, index + 1, array.length - index-1 );
         array[index] = value;
         size++;
     }
